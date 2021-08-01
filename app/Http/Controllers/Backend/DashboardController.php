@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-// use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,7 +11,5 @@ class DashboardController extends Controller
     {
        return view('backend_pages.dashboard');
     }
-    public function test(){
-        return view('backend_pages.test');
-    }
+
 }

@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
+// Route::get('/', [DashboardController::class, 'index']);
+// Route::get('/test', [DashboardController::class, 'test']);
 Route::get('/', [DashboardController::class, 'index']);
-Route::get('/test', [DashboardController::class, 'test']);
+Route::get('/products', [ProductController::class, 'index'])->name('admin.product');
+Route::get('/products/create', [ProductController::class, 'create'])->name('admin.product.create');
+Route::post('/products/create', [ProductController::class, 'store']);
