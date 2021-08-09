@@ -21,3 +21,6 @@ Route::get('/', [DashboardController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index'])->name('admin.product');
 Route::get('/products/create', [ProductController::class, 'create'])->name('admin.product.create');
 Route::post('/products/create', [ProductController::class, 'store']);
+Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+Route::post('/products/edit/{id}', [ProductController::class, 'update']);
+Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');

@@ -35,4 +35,35 @@ class ProductController extends Controller
 
         return redirect()->route('admin.product')->with('success', 'Product Created Successfully!!');
     }
+    // Edit data
+    public function edit($id){
+        $product = Product::find($id);
+        return view('backend_pages.products.edit', compact('product'));
+    }
+    // Update data
+    public function update(Request $request, $id){
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+        ],[
+            'name.required' => 'Please Enter Product Name!!!',
+            'price.required' => 'Please Enter Product Price!!!',
+            'description.required' => 'Please Enter Product Description!!!',
+        ]);
+
+        $data = [
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+        ];
+        Product::find($id)->update($data);
+
+        return redirect()->route('admin.product')->with('update', 'Product Updated Successfully');
+    }
+    // Delete Data
+    public function delete($id){
+        Product::find($id)->delete();
+        return redirect()->back()->with('delete', 'Product Deleted Successfully');
+    }
 }
