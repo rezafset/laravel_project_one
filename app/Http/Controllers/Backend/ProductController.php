@@ -5,35 +5,56 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
+    // Show all data
     public function index(){
         $products = Product::all();
         return view('backend_pages.products.index', compact('products'));
     }
-
+    // Create Data
     public function create(){
         return view('backend_pages.products.create');
     }
+    // Store Data
     public function store(Request $request){
+        // dd($request->all());
         $request->validate([
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
+            'photo' => 'required',
         ],[
             'name.required' => 'Please Enter Product Name!!!',
             'price.required' => 'Please Enter Product Price!!!',
             'description.required' => 'Please Enter Product Description!!!',
+            'photo.required' => 'required | mimes:jpeg,jpg,png | max:1000',
         ]);
-        $data = [
-            'name' => $request->input('name'),
-            'price' => $request->input('price'),
-            'description' => $request->input('description'),
-        ];
-        Product::create($data);
+
+        if($request->hasFile('photo')){
+
+            $image = $request->file('photo');
+            $newPhoto = 'product_'.time().'.'.$image->getClientOriginalExtension() ;
+            $request->photo->move('Upload/Products/', $newPhoto);
+            // dd($newPhoto);
+            $data = [
+                'name' => $request->input('name'),
+                'price' => $request->input('price'),
+                'description' => $request->input('description'),
+                'photo' => $newPhoto,
+            ];
+
+            Product::create($data);
+        }
 
         return redirect()->route('admin.product')->with('success', 'Product Created Successfully!!');
+    }
+    // Show Specific Data
+    public function show($id){
+        $product = Product::find($id);
+        return view('backend_pages.products.show', compact('product'));
     }
     // Edit data
     public function edit($id){
@@ -52,18 +73,40 @@ class ProductController extends Controller
             'description.required' => 'Please Enter Product Description!!!',
         ]);
 
-        $data = [
-            'name' => $request->input('name'),
-            'price' => $request->input('price'),
-            'description' => $request->input('description'),
-        ];
-        Product::find($id)->update($data);
+        $product = Product::find($id);
+
+        if($request->hasFile('photo')){
+
+            $destination = 'Upload/Products/'.$product->photo;
+
+            if(File::exists($destination)){
+
+                File::delete($destination);
+            }
+
+            $image = $request->file('photo');
+            $newImage = 'product_'.time().'.'.$image->getClientOriginalExtension();
+            $image->move('Upload/Products', $newImage);
+            $data = [
+                'name' => $request->input('name'),
+                'price' => $request->input('price'),
+                'description' => $request->input('description'),
+                'photo' => $newImage,
+            ];
+            $product->update($data);
+        }
 
         return redirect()->route('admin.product')->with('update', 'Product Updated Successfully');
     }
     // Delete Data
     public function delete($id){
-        Product::find($id)->delete();
+        $product = Product::find($id);
+        $destination = 'Upload/Products/'.$product->photo;
+
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
+        $product->delete();
         return redirect()->back()->with('delete', 'Product Deleted Successfully');
     }
 }

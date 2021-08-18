@@ -5,7 +5,7 @@
 <div class="container">
     <div class="d-flex justify-content-between">
         <h2 class="">Product List</h2>
-        <a href="{{ route('admin.product.create') }}"><button type="button" class="btn btn-success">Create Product</button></a>
+        <a href="{{ route('admin.product.create') }}"><button type="button" class="btn btn-success"><i class="fas fa-plus-circle"></i> Create Product</button></a>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -28,7 +28,7 @@
         </div>
     @endif
     @if (session('update'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>{{ session('update') }}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -50,6 +50,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Photo</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -61,8 +62,12 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->description }}</td>
                         <td>
-                            <a href="{{ route('admin.product.edit',$product->id) }}"><button type="button" class="btn btn-primary btn-sm">Edit</button></a>
-                            <a href="{{ route('admin.product.delete', $product->id) }}"><button type="button" onclick="return confirm('Are You sure to delete it??')" class="btn btn-danger btn-sm">Delete</button></a>
+                            <img src="{{ asset('Upload/Products/'.$product->photo) }}" class="img-fluid" height="50" width="80" alt="">
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.product.show',$product->id) }}"><button type="button" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></button></a>
+                            <a href="{{ route('admin.product.edit',$product->id) }}"><button type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button></a>
+                            <a href="{{ route('admin.product.delete', $product->id) }}"><button type="button" onclick="return confirm('Are You sure to delete it??')" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button></a>
                         </td>
                     </tr>
                 @endforeach
