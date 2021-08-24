@@ -62,7 +62,7 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->description }}</td>
                         <td>
-                            <img src="{{ asset('Upload/Products/'.$product->photo) }}" class="img-fluid" height="50" width="80" alt="">
+                            <img src="{{ asset('Upload/Products/'.$product->photo) }}" class="img-fluid" height="50" width="50" alt="">
                         </td>
                         <td>
                             <a href="{{ route('admin.product.show',$product->id) }}"><button type="button" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></button></a>

@@ -13,34 +13,31 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="name" class="form-label">Product Name</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                id="name">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" id="name">
                             @error('name')
-                            <strong class="text-danger">{{ $message }}</strong>
+                                <strong class="text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="price" class="form-label">Product Price</label>
-                            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price"
-                                id="price">
+                            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price"  value="{{ old('price') }}" id="price">
                             @error('price')
-                            <strong class="text-danger">{{ $message }}</strong>
+                                <strong class="text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Product Description</label>
                             <textarea type="text" class="form-control @error('description') is-invalid @enderror"
-                                name="description" id="description"></textarea>
+                                name="description" id="description"> {{ old('description') }} </textarea>
                             @error('description')
-                            <strong class="text-danger">{{ $message }}</strong>
+                                <strong class="text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="photo" class="form-label">Product Image</label>
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo"
-                                id="photo">
+                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" id="photo">
                             @error('photo')
-                            <strong class="text-danger">{{ $message }}</strong>
+                                <strong class="text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
 
