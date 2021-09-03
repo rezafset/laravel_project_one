@@ -63,7 +63,7 @@
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->address }}</td>
                         <td>
-                            <img src="{{ asset('Upload/Users/'.$user->user_photo) }}" class="img-fluid" height="50" width="50" alt="">
+                            <img src="{{ asset('Upload/Users/'.$user->user_photo) }}" class="img-fluid" height="40" width="40" alt="">
                         </td>
                         <td>
                             <a href="{{ route('admin.user.show',$user->id) }}"><button type="button" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></button></a>

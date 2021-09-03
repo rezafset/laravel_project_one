@@ -57,15 +57,6 @@
                             @enderror
                         </div>
 
-                        {{-- <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"
-                                   id="password_confirmation">
-                            @error('password_confirmation')
-                            <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div> --}}
-
                         <div class="mb-1">
                             <label for="user_photo" class="form-label">User Image</label>
                             <input type="file" class="form-control @error('user_photo') is-invalid @enderror" name="user_photo" id="user_photo">

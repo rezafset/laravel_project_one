@@ -1,7 +1,9 @@
 @extends('layout.backend')
 
 @section('main_content')
-
+@if (session()->has('success_msg_admin'))
+      <h3 class="text-center"><strong class="text-success">{{ session()->get('success_msg_admin') }}</strong></h3>
+@endif
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Dashboard</h1>
     <div class="btn-toolbar mb-2 mb-md-0">

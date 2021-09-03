@@ -79,6 +79,7 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
+            'photo' => 'required|image',
         ],[
             'name.required' => 'Please Enter Product Name!!!',
             'price.required' => 'Please Enter Product Price!!!',
@@ -86,7 +87,13 @@ class ProductController extends Controller
         ]);
 
         $product = Product::find($id);
-
+        $data = [
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            // 'photo' => $newImage,
+        ];
+        $product->update($data);
         if($request->hasFile('photo')){
 
             $destination = 'Upload/Products/'.$product->photo;
@@ -99,13 +106,7 @@ class ProductController extends Controller
             $image = $request->file('photo');
             $newImage = 'product_'.time().'.'.$image->getClientOriginalExtension();
             $image->move('Upload/Products', $newImage);
-            $data = [
-                'name' => $request->input('name'),
-                'price' => $request->input('price'),
-                'description' => $request->input('description'),
-                'photo' => $newImage,
-            ];
-            $product->update($data);
+            $product->update(['photo' => $newImage]);
         }
 
         return redirect()->route('admin.product')->with('update', 'Product Updated Successfully');
