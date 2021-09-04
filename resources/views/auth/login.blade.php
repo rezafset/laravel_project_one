@@ -23,6 +23,9 @@
                     @if (session()->has('error'))
                         <strong class="text-danger text-center mt-2">{{ session()->get('error') }}</strong>
                     @endif
+                    @if (session()->has('not_allow'))
+                        <strong class="text-danger text-center mt-2">{{ session()->get('not_allow') }}</strong>
+                    @endif
                     <div class="card-body">
                         <form method="post" action="{{ route('login') }}">
                             @csrf
