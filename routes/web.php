@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     // For Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
     // For Product
     Route::get('/products', [ProductController::class, 'index'])->name('admin.product');
     Route::get('/products/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -42,5 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('admin.user.edit');
     Route::post('/users/edit/{id}', [UserController::class, 'update']);
     Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('admin.user.delete');
+    Route::get('/user/profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('/user/profile', [UserController::class, 'profileUpdate']);
+    Route::get('/user/password', [UserController::class, 'password'])->name('user.password');
+    Route::post('/user/password', [UserController::class, 'changePassword']);
    });
 });

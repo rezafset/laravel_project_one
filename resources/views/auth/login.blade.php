@@ -20,12 +20,16 @@
                     <div class="card-header bg-primary">
                         <h3 class="text-center text-light">Login Form</h3>
                     </div>
+                    @if (session()->has('success_password'))
+                        <strong class="text-success text-center mt-2">{{ session()->get('success_password') }}</strong>
+                    @endif
                     @if (session()->has('error'))
                         <strong class="text-danger text-center mt-2">{{ session()->get('error') }}</strong>
                     @endif
                     @if (session()->has('not_allow'))
                         <strong class="text-danger text-center mt-2">{{ session()->get('not_allow') }}</strong>
                     @endif
+
                     <div class="card-body">
                         <form method="post" action="{{ route('login') }}">
                             @csrf
