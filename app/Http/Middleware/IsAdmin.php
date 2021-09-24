@@ -20,7 +20,7 @@ class IsAdmin
         if (Auth::user()->role === 'admin') {
             return $next($request);
         }else {
-            return redirect()->route('login')->with('not_allow', 'Sorry you are not admin');
+            return redirect()->route('home');
         }
     }
 }

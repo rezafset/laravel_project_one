@@ -10,7 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index(){
-        return view('auth.login');
+        if(auth()->user()){
+            if(auth()->user()->role == 'admin'){
+                return redirect()->route('admin.dashboard');
+            }else {
+                return redirect()->route('home');
+            }
+        }else {
+            return view('auth.login');
+        }
+
     }
     public function login(Request $request){
 
@@ -21,7 +30,12 @@ class LoginController extends Controller
             ]);
             $crads = $request->except('_token');
             if (Auth::attempt($crads)) {
-                return redirect()->route('admin.dashboard')->with('success_msg_admin', 'Admin Logging Successfully!!');
+                if(auth()->user()->role == 'admin'){
+                    return redirect()->route('admin.dashboard')->with('success_msg_admin', 'Admin Logging Successfully!!');
+                }else {
+                    return redirect()->route('home');
+                }
+
             }else {
                 return redirect()->back()->with('error', 'Invalid name or password!!');
             }

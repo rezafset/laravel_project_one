@@ -4,6 +4,8 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CustomerController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,18 +22,32 @@ use Illuminate\Support\Facades\Route;
 
 // Frontend
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/register', [CustomerController::class, 'register'])->name('customer.register');
+Route::post('/register', [CustomerController::class, 'doRegister']);
+
 
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+// Cart
+Route::get('/add/cart/{id}', [CartController::class, 'cart'])->name('add.cart');
+Route::get('/cart', [CartController::class, 'show_cart'])->name('cart');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/customerProfile', [CustomerController::class, 'customerProfile'])->name('customer.profile');
+    Route::get('/editCustomer', [CustomerController::class, 'editCustomer'])->name('customer.edit');
+    Route::post('/editCustomer', [CustomerController::class, 'updateCustomer']);
+    Route::get('/customerPassword', [CustomerController::class, 'password'])->name('customer.password');
+    Route::post('/customerPassword', [CustomerController::class, 'passwordChange']);
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
     Route::middleware('isAdmin')->group(function () {
 
         Route::prefix('dashboard')->group(function () {
             // For Dashboard
             Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-            Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
             // For Product
             Route::get('/products', [ProductController::class, 'index'])->name('admin.product');
@@ -53,6 +69,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/user/profile', [UserController::class, 'profileUpdate']);
             Route::get('/user/password', [UserController::class, 'password'])->name('user.password');
             Route::post('/user/password', [UserController::class, 'changePassword']);
+
         });
     });
 });

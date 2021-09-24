@@ -50,7 +50,9 @@
 </header>
 
 <main role="main">
-
+    @if (session()->has('message'))
+        <p class="alert alert-{{ session()->get('alert') }}">{{ session()->get('message') }}</p>
+    @endif
     @yield('frontend_main')
 
 </main>

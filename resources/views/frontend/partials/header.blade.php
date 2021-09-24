@@ -8,11 +8,16 @@
                     off to some social networking sites or contact information.</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-                <h4 class="text-white">Contact</h4>
+                <h4 class="text-white">User</h4>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                    <li><a href="#" class="text-white">Like on Facebook</a></li>
-                    <li><a href="#" class="text-white">Email me</a></li>
+                    @if (auth()->user())
+                        <li><a href="{{ route('customer.profile') }}" class="text-white">{{ auth()->user()->name }}</a></li>
+                        <li><a href="{{ route('logout') }}" class="text-white">Logout</a></li>
+                    @else
+                        <li><a href="{{ route('customer.register') }}" class="text-white">Register</a></li>
+                        <li><a href="{{ route('login') }}" class="text-white">Login</a></li>
+                    @endif
+
                 </ul>
             </div>
         </div>
@@ -20,7 +25,7 @@
 </div>
 <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand d-flex align-items-center">
+        <a href="{{ route('home') }}" class="navbar-brand d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true"
                 class="mr-2" viewBox="0 0 24 24" focusable="false">

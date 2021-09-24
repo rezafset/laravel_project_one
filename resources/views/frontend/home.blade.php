@@ -7,8 +7,7 @@
             <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc.
                 Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
             <p>
-                <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+                <a href="{{ route('cart') }}" class="btn btn-primary my-2">Show Cart</a>
             </p>
         </div>
     </section>
@@ -26,6 +25,9 @@
                                 <p class="card-text">Price: {{ $product->price }}$</p>
                                 <p class="card-text">Description: {{ $product->description }}</p>
                                 <p class="card-text">Uploaded: {{ $product->created_at->format('D, d M Y, g:i A') }}</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="{{ route('add.cart', $product->id) }}" class="btn btn-primary">Add to Cart</a>
                             </div>
                         </div>
                     </div>
