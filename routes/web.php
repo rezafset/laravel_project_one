@@ -35,6 +35,11 @@ Route::get('/add/cart/{id}', [CartController::class, 'cart'])->name('add.cart');
 Route::get('/cart', [CartController::class, 'show_cart'])->name('cart');
 
 Route::middleware('auth')->group(function () {
+    // Checkout
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('customer.checkout');
+    // Order
+    Route::post('/order', [CartController::class, 'order'])->name('customer.order');
+
     Route::get('/customerProfile', [CustomerController::class, 'customerProfile'])->name('customer.profile');
     Route::get('/editCustomer', [CustomerController::class, 'editCustomer'])->name('customer.edit');
     Route::post('/editCustomer', [CustomerController::class, 'updateCustomer']);
