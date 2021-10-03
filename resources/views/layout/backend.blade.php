@@ -15,6 +15,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
 
 
     <style>
@@ -31,6 +32,7 @@
                 font-size: 3.5rem;
             }
         }
+
     </style>
 
     <!-- Custom styles for this template -->
@@ -63,6 +65,13 @@
     </script>
 
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 </body>
 
 </html>

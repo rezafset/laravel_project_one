@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\LoginController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\CartController;
@@ -62,6 +63,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
             Route::post('/products/edit/{id}', [ProductController::class, 'update']);
             Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
+            // Order
+            Route::get('/orders', [OrderController::class, 'index'])->name('admin.order');
+            Route::get('/oders/show/{id}', [OrderController::class, 'show'])->name('admin.order.show');
+            Route::post('/oders/show/{id}', [OrderController::class, 'update']);
+
             // For User
             Route::get('/users', [UserController::class, 'index'])->name('admin.user');
             Route::get('/users/create', [UserController::class, 'create'])->name('admin.user.create');

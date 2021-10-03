@@ -1,7 +1,7 @@
 @extends('layout.frontend')
 
 @section('frontend_main')
-    <div class="container py-4 my-4">
+    <div class="container py-2 my-2">
         <div class="row">
             <div class="col-md-6">
                 <h4 class=" py-3 text-center">Selected Product List</h4>
@@ -83,6 +83,19 @@
                                 @error('address')
                                     <strong class="text-danger">{{ $message }}</strong>
                                 @enderror
+                            </div>
+
+                            <div class="mb-1">
+                                <label for="payment_method" class="form-label" >Payment Method</label>
+                                <select class="form-control" id="payment_method" name="payment_method">
+                                    <option selected>bKash</option>
+                                    <option value="1">Nogod</option>
+                                    <option value="2">Rocket</option>
+                                </select>
+                            </div>
+                            <div class="mb-1">
+                                <label for="transaction_id" class="form-label" >Transaction ID</label>
+                                <input type="text" name="transaction_id" class="form-control" id="transaction_id">
                             </div>
                             <input type="hidden" name="price" value="{{ $total_price  }}">
                             <input type="hidden" name="quantity" value="{{ $total_quantity  }}">

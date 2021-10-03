@@ -52,6 +52,8 @@ class CartController extends Controller
             'address' => $request->input('address'),
             'price' => $request->input('price'),
             'quantity' => $request->input('quantity'),
+            'payment_method' => $request->input('payment_method'),
+            'transaction_id' => $request->input('transaction_id'),
             'status' => 'pending',
             'truck_no' => auth()->user()->id.time(),
             'user_id' => auth()->user()->id,
